@@ -1,7 +1,7 @@
 public class Case {
     private int x;
     private int y;
-    private boolean bateau;
+    private boolean dispo;
     private boolean touchee;
 
     public Case(int x, int y) throws Exception {
@@ -11,7 +11,7 @@ public class Case {
             this.x = x;
             this.y = y;
         }
-        this.bateau = false;
+        this.dispo = true;
         this.touchee = false;
     }
 
@@ -23,16 +23,16 @@ public class Case {
         return this.y;
     }
 
-    public boolean getBateau() {
-        return this.bateau;
+    public boolean getDispo() {
+        return this.dispo;
     }
 
     public boolean getTouchee() {
         return this.touchee;
     }
 
-    public void setBateau(boolean p) {
-        this.bateau = p;
+    public void setDispo(boolean p) {
+        this.dispo = p;
     }
 
     public void setTouchee(boolean p) {
