@@ -1,4 +1,5 @@
 public class Case {
+    
     private int x;
     private int y;
     private boolean dispo;
@@ -6,12 +7,23 @@ public class Case {
 
     public Case(int x, int y) throws Exception {
         if(x<0 || y<0) {
-            throw new Exception();
+            throw new Exception("La case ne peut pas être dans une position négative");
         } else {
             this.x = x;
             this.y = y;
         }
         this.dispo = true;
+        this.touchee = false;
+    }
+
+    public Case(int x, int y, boolean disp) throws Exception {
+        if(x<0 || y<0) {
+            throw new Exception("La case ne peut pas être dans une position négative");
+        } else {
+            this.x = x;
+            this.y = y;
+        }
+        this.dispo = disp;
         this.touchee = false;
     }
 

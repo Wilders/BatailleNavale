@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  * Classe abstraite modélisant les bateaux.
  * Elle a comme attribut la taille du bateau (nombre de cases)
@@ -6,104 +7,50 @@
  */
 public abstract class Bateau {
 
-    private int taille;
-    private int x;
-    private int y;
+    private Grille grille;
+    private ArrayList<Case> lPosition;
     private boolean orientation;
 
+    public Bateau(Grille g, boolean ori) {
+        this.grille = g;
+        this.orientation = ori;
+        this.lPosition = new ArrayList<Case>();
+    }
 
-    /**
-     * Constructeur de la classe Bateau, n'initialise pas la taille qui sera
-     * initialiser dans la classe propre à chaque type de bateau
-     * @param g Grille dans laquelle se situe le bateau
-     * @param x Abscisse de la position du coin inférieur gauche du bateau
-     * @param y Ordonnée de la position du coin inférieur gauche du bateau
-     * @param o Orientation du bateau (Horizontal = False, Vertical = True)
-     * @throws Exception
-     */
-    public Bateau(Grille g, int x, int y, boolean o) throws Exception{
-        if (x<=g.getLargeur() && x>=0){
-            this.x=x;
-        }else {
-            throw new Exception("L'abscisse n'est pas valide");
+    protected void addCase(Case e) throws Exception {
+        if(e.getX() > this.getGrille().getLargeur() || e.getY() > this.getGrille().getLongueur()) {
+            throw new Exception("La case n'est pas dans la grille");
         }
-        if (y<=g.getLongueur() && y>=0){
-            this.y=y;
-        }else {
-            throw new Exception("L'ordonné n'est pas valide");
+        for (Case c : this.grille.getLCase()) {
+            if(c.getX() == e.getX() && c.getY() == e.getY() && (!c.getDispo() || c.getTouchee())) {
+                throw new Exception("La case n'est pas disponible");
+            }
         }
-        if (o){
-            this.orientation=true;
-        }else {
-            this.orientation=false;
+        this.lPosition.add(e);
+        e.setDispo(false);
+    }
+
+    protected abstract void addMultipleCases(Case e) throws Exception;
+
+    protected boolean getOrientation() {
+        return this.orientation;
+    }
+
+    protected Grille getGrille() {
+        return this.grille;
+    }
+
+    public String toString() {
+        String res = "";
+        if(!this.lPosition.isEmpty()) {
+            res = "[";
+            for (Case c : this.lPosition) {
+                res += "(" + c.getX() + "," + c.getY() + ")";
+            }
+            res+= "]";
+        } else {
+            res = "[Pas encore posé]";
         }
-    }
-
-    /**
-     * Getter de la taille du bateau
-     * @return Taille du bateau
-     */
-    public int getTaille() {
-        return taille;
-    }
-
-    /**
-     * Getter de l'ordonnee de la position du
-     * coin supérieur gauche du bateau
-     * @return Ordonnee de la position du coin supérieur gauche du bateau
-     */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * Getter de l'abscisse de la position du
-     * coin supérieur gauche du bateau
-     * @return
-     */
-    public int getY() {
-        return y;
-    }
-
-    /**
-     * Getter du booleen de l'orientation du bateau
-     * @return Booleen de l'orientation (False = Horizontal et True = Vertical)
-     */
-    public boolean isOrientation() {
-        return orientation;
-    }
-
-    /**
-     * Setter de la taille du bateau
-     * @param taille
-     */
-    public void setTaille(int taille) {
-        this.taille = taille;
-    }
-
-    /**
-     * Setter de l'abscisse de la position du
-     * coin supérieur gauche du bateau
-     * @param x
-     */
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    /**
-     * Setter de l'ordonnee de la position du
-     * coin supérieur gauche du bateau
-     * @param y
-     */
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    /**
-     * Setter du booleen de l'orientation du bateau
-     * @param orientation
-     */
-    public void setOrientation(boolean orientation) {
-        this.orientation = orientation;
+        return res;
     }
 }
