@@ -1,5 +1,8 @@
+/**
+ * Classe ContreTorpilleur héritant de la classe Bateau
+ */
 public class ContreTorpilleur extends Bateau {
-    public PorteAvions(Grille g, int x, int y, boolean o){
+    public ContreTorpilleur(Grille g, int x, int y, boolean o){
         super(g, x, y, o);
         this.setTaille(3);
     }
