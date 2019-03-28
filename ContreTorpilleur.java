@@ -25,6 +25,10 @@ public class ContreTorpilleur extends Bateau {
         }
     }
 
+    public String getNom() {
+        return this.nom;
+    }
+
     public String toString() {
         return this.nom + super.toString();
     }

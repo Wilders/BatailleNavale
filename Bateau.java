@@ -1,3 +1,4 @@
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 /**
  * Classe abstraite modélisant les bateaux.
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 public abstract class Bateau {
 
     private Grille grille;
+
+
     private ArrayList<Case> lPosition;
     private boolean orientation;
 
@@ -36,9 +39,30 @@ public abstract class Bateau {
         return this.orientation;
     }
 
+    public ArrayList<Case> getlPosition() {
+        return lPosition;
+    }
+
     protected Grille getGrille() {
         return this.grille;
     }
+
+    public int getTaille(){
+        return this.lPosition.size();
+    }
+
+    public double pourcentageTouche(){
+        int taille = this.getTaille();
+        int nbTouche=0;
+        for (Case c : lPosition){
+            if (c.getTouchee() == true){
+                nbTouche++;
+            }
+        }
+        return ((double)(nbTouche)/(double)(taille))*100;
+    }
+
+    public abstract String getNom();
 
     public String toString() {
         String res = "";
