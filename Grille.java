@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Cette classe modélise une grille
  * de jeu, elle a comme attribut une
@@ -17,32 +19,33 @@ public class Grille {
     /**
      * Longueur de la grille
      */
-    private int longueur;
+    private int hauteur;
 
     /**
      * Liste de cases
      */
-    private ArrayList<Case> lCases;
+    private Case[][] tCases;
 
     /**
      * Constructeur de Grille, créer une grille
      * de minimum 10x10 (taille passée en param)
      * et remplie la liste de cases.
      * @param pLargeur Largeur voulue
-     * @param pLongueur Longueur voulue
+     * @param pHauteur Longueur voulue
      * @throws Exception La longueur et la largeur doivent être supérieur ou égal à 10
      */
-    public Grille(int pLargeur, int pLongueur) throws Exception {
-        if(pLargeur < 10 || pLongueur < 10) {
+    public Grille(int pLargeur, int pHauteur) throws Exception {
+        if(pLargeur < 10 || pHauteur < 10) {
             throw new Exception("Longueur ou largeur doit être supérieur ou égal à 10");
         } else {
-            this.largeur = pLongueur;
-            this.longueur = pLargeur;
+            this.largeur = pHauteur;
+            this.hauteur = pLargeur;
         }
-        lCases = new ArrayList<Case>();
-        for (int i = 0; i < this.getLargeur(); i++) {
-            for (int j = 0; j < this.getLongueur(); j++) {
-                lCases.add(new Case(i,j));
+
+        tCases = new Case[pLargeur][pHauteur];
+        for (int i=0; i<pLargeur; i++){
+            for (int j=0; j<pHauteur; j++){
+                tCases[i][j]=new Case(i,j);
             }
         }
     }
@@ -51,8 +54,8 @@ public class Grille {
      * Getter pour l'attribut longueur
      * @return longueur
      */
-    public int getLongueur() {
-        return this.longueur;
+    public int getHauteur() {
+        return this.hauteur;
     }
 
     /**
@@ -63,11 +66,14 @@ public class Grille {
         return this.largeur;
     }
 
-    /**
-     * Getter pour l'attribut lCases
-     * @return lCases
-     */
-    public ArrayList<Case> getLCase() {
-        return this.lCases;
+    public Case[][] gettCases() {
+        return tCases;
+    }
+
+    @Override
+    public String toString() {
+        return "Grille{" +
+                "tCases=" + Arrays.toString(tCases) +
+                '}';
     }
 }

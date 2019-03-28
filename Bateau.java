@@ -8,11 +8,9 @@ import java.util.ArrayList;
  */
 public abstract class Bateau {
 
-    private Grille grille;
-
-
-    private ArrayList<Case> lPosition;
-    private boolean orientation;
+    protected Grille grille;
+    protected ArrayList<Case> lPosition;
+    protected boolean orientation;
 
     public Bateau(Grille g, boolean ori) {
         this.grille = g;
@@ -21,19 +19,30 @@ public abstract class Bateau {
     }
 
     protected void addCase(Case e) throws Exception {
-        if(e.getX() > this.getGrille().getLargeur() || e.getY() > this.getGrille().getLongueur()) {
+        if(e.getX() > this.getGrille().getLargeur() || e.getY() > this.getGrille().getHauteur()) {
             throw new Exception("La case n'est pas dans la grille");
         }
-        for (Case c : this.grille.getLCase()) {
-            if(c.getX() == e.getX() && c.getY() == e.getY() && (!c.getDispo() || c.getTouchee())) {
-                throw new Exception("La case n'est pas disponible");
-            }
+
+        if(grille.gettCases()[e.getX()][e.getY()].getDispo()==false) {
+            throw new Exception("La case n'est pas disponible");
         }
+
         this.lPosition.add(e);
         e.setDispo(false);
     }
 
     protected abstract void addMultipleCases(Case e) throws Exception;
+
+    public double pourcentageTouche(){
+        int taille = this.getTaille();
+        int nbTouche=0;
+        for (Case c : lPosition){
+            if (c.getTouchee() == true){
+                nbTouche++;
+            }
+        }
+        return ((double)(nbTouche)/(double)(taille))*100;
+    }
 
     protected boolean getOrientation() {
         return this.orientation;
@@ -49,17 +58,6 @@ public abstract class Bateau {
 
     public int getTaille(){
         return this.lPosition.size();
-    }
-
-    public double pourcentageTouche(){
-        int taille = this.getTaille();
-        int nbTouche=0;
-        for (Case c : lPosition){
-            if (c.getTouchee() == true){
-                nbTouche++;
-            }
-        }
-        return ((double)(nbTouche)/(double)(taille))*100;
     }
 
     public abstract String getNom();

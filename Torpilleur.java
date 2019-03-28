@@ -14,11 +14,8 @@ public class Torpilleur extends Bateau {
     protected void addMultipleCases(Case e) throws Exception{
         int x = e.getX();
         int y = e.getY();
-        if(this.getOrientation()) {
-            this.addCase(new Case(x, y, false));
-        } else {
-            this.addCase(new Case(x, y, false));
-        }
+        this.addCase(grille.gettCases()[x][y]);
+        grille.gettCases()[x][y].setDispo(false);
     }
 
     public String getNom() {

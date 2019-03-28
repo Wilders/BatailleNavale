@@ -5,15 +5,13 @@ import java.util.ListIterator;
 public class Joueur {
 
     private Grille grille;
+
     private ArrayList<Bateau> lBateau;
 
     public Joueur(Grille g) {
         this.grille=g;
         this.lBateau = new ArrayList<Bateau>();
     }
-
-
-
 
     public void ajouterBateau(Case c, boolean orientation, int taille) throws Exception {
         switch (taille){
@@ -77,10 +75,41 @@ public class Joueur {
         }
     }
 
+    public void tirer(Joueur j, Case c) throws Exception{
+        if (c.getX()<=j.grille.getLargeur() || c.getY()<=j.grille.getHauteur() || c.getX()>=0 || c.getY()>=0){
+            if (j.grille.gettCases()[c.getX()][c.getY()].getTouchee()==false){
+                j.grille.gettCases()[c.getX()][c.getY()].setTouchee(true);
+            }else {
+                throw new Exception("Case déjà touchée");
+            }
+        }else {
+            throw new Exception("Case inexistante dans cette grille");
+        }
+    }
 
+    public boolean couler(Bateau b){
+        boolean res = false;
+        if (b.pourcentageTouche()==100.0){
+            res=true;
+        }
+        return res;
+    }
 
+    public boolean perdu(){
+        boolean res=false;
+        int cpt=0;
+        for (Bateau b : lBateau){
+            if (couler(b)){
+                cpt++;
+            }
+        }
+        if (cpt==lBateau.size()){
+            res=true;
+        }
+        return res;
+    }
 
-    protected ArrayList<Bateau> triBateauTaille(ArrayList<Bateau> lB){
+    public ArrayList<Bateau> triBateauTaille(ArrayList<Bateau> lB){
         int tmp = lB.size();
         ArrayList<Bateau> res = new ArrayList<>(tmp);
         ArrayList<Bateau> temp = new ArrayList<>(lB);
@@ -99,15 +128,12 @@ public class Joueur {
         return res;
     }
 
-
-
-
     /**
      * NE MARCHE PAS POUR LE MOMENT
      * @param lB
      * @return
      */
-    protected ArrayList<Bateau> triBateauPourcentage(ArrayList<Bateau> lB){
+    public ArrayList<Bateau> triBateauPourcentage(ArrayList<Bateau> lB){
         int tmp = lB.size();
         ArrayList<Bateau> res = new ArrayList<>(tmp);
         ArrayList<Bateau> temp = new ArrayList<>(lB);
@@ -126,65 +152,13 @@ public class Joueur {
         return res;
     }
 
-
-
-
-    public void toucher(Grille g, Case c) throws Exception{
-        if (g.getLCase().contains(c)==true){
-            if (g.getLCase().get(g.getLCase().indexOf(c)).getTouchee()==false){
-                g.getLCase().get(g.getLCase().indexOf(c)).setTouchee(true);
-            }else {
-                throw new Exception("Case déjà touchée");
-            }
-        }else {
-            throw new Exception("Case inexistante dans cette grille");
-        }
+    public ArrayList<Bateau> getlBateau() {
+        return lBateau;
     }
 
-
-
-
-    public boolean couler(Bateau b){
-        boolean res = false;
-        if (b.pourcentageTouche()==100.0){
-            res=true;
-        }
-        return res;
+    public Grille getGrille() {
+        return grille;
     }
-
-
-
-
-    public boolean perdu(Joueur j){
-        boolean res=false;
-        int cpt=0;
-        for (Bateau b : lBateau){
-            if (couler(b)){
-                cpt++;
-            }
-        }
-        if (cpt==lBateau.size()){
-            res=true;
-        }
-        return res;
-    }
-
-    /**
-     * Perdu V2 (opti)
-     * @param j
-     * @return
-     */
-    public boolean perdant(Joueur j) {
-        boolean res = true;
-        for(Bateau b : lBateau) {
-            if(!couler(b)) {
-                res = false;
-                break;
-            }
-        }
-        return res;
-    }
-
 
     public String toString() {
         String res = "Ce joueur possede " + this.lBateau.size() + " bateaux:\n";
@@ -192,44 +166,5 @@ public class Joueur {
             res += "\t Un " + b.toString() + "\n";
         }
         return res;
-    }
-
-
-
-
-    public static void main(String[] args) {
-        try {
-            Grille g = new Grille(10, 10);
-            Joueur j  = new Joueur(g);
-
-            j.ajouterBateau(new Case(1,1), true, 1);
-            j.ajouterBateau(new Case(4,8), false, 5);
-            j.ajouterBateau(new Case(2,2), false, 2);
-            j.ajouterBateau(new Case(4,4), false, 4);
-            j.ajouterBateau(new Case(1,5), false, 3);
-
-            System.out.println(j.toString());
-            System.out.println("=============");
-            System.out.println(j.lBateau.size());
-            System.out.println("=============");
-            System.out.println(j.triBateauTaille(j.lBateau));
-            System.out.println("=============");
-            System.out.println(j.triBateauTaille(j.lBateau).size());
-            System.out.println("=============");
-            System.out.println(j.triBateauPourcentage(j.lBateau));
-            System.out.println("=============");
-            //System.out.println(j.triBateauPourcentage(j.lBateau).size());
-
-            //System.out.println("=============" );
-            j.lBateau.get(1).getlPosition().get(1).setTouchee(true);
-            System.out.println(j.triBateauPourcentage(j.lBateau));
-            System.out.println("=============");
-            //for (Case t : j.lBateau.get(1).getlPosition()){
-            //    System.out.println(t.getTouchee());
-            //}
-            System.out.println(j.lBateau.get(1).pourcentageTouche());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 }

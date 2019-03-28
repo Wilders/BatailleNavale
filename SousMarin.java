@@ -16,11 +16,13 @@ public class SousMarin extends Bateau {
         int y = e.getY();
         if(this.getOrientation()) {
             for (int i = 0; i < 3; i++) {
-                this.addCase(new Case(x, y+i, false));
+                this.addCase(grille.gettCases()[x][y+i]);
+                grille.gettCases()[x][y+i].setDispo(false);
             }
         } else {
             for (int i = 0; i < 3; i++) {
-                this.addCase(new Case(x+i, y, false));
+                this.addCase(grille.gettCases()[x+i][y]);
+                grille.gettCases()[x+i][y].setDispo(false);
             }
         }
     }
