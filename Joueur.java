@@ -169,7 +169,21 @@ public class Joueur {
         return res;
     }
 
-
+    /**
+     * Perdu V2 (opti)
+     * @param j
+     * @return
+     */
+    public boolean perdant(Joueur j) {
+        boolean res = true;
+        for(Bateau b : lBateau) {
+            if(!couler(b)) {
+                res = false;
+                break;
+            }
+        }
+        return res;
+    }
 
 
     public String toString() {
