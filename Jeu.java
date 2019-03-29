@@ -11,7 +11,12 @@ public class Jeu {
             case 1 :
                 int largeur=0;
                 int hauteur=0;
+                System.out.print("Entrez la largeur de la grille souhaitée (10 minimum, 100 maximum) : ");
+                largeur = sc.nextInt();
+                System.out.print("Entrez la hauteur de la grille souhaitée (10 minimum, 100 maximum) : ");
+                hauteur = sc.nextInt();
                 while ((largeur<10 || largeur>100)||(hauteur<10 || hauteur>100)){
+                    System.out.println("Taille de la grille trop grande ou trop petite, entrez de nouvelles dimensions : ");
                     System.out.print("Entrez la largeur de la grille souhaitée (10 minimum, 100 maximum) : ");
                     largeur = sc.nextInt();
                     System.out.print("Entrez la hauteur de la grille souhaitée (10 minimum, 100 maximum) : ");
@@ -37,8 +42,8 @@ public class Jeu {
                     if (xBat>=0 && xBat<j.getGrille().getLargeur() && yBat>=0 && yBat<j.getGrille().getHauteur() && j.verifierPosBateau(g.gettCases()[xBat][yBat],orientation,i)){
                         j.ajouterBateau(g.gettCases()[xBat][yBat], orientation, i);
                     }else {
-                        InfoPosBateau infoB = j.replacerBateau(i);
-                        j.ajouterBateau(g.gettCases()[infoB.getxB()][infoB.getyB()],infoB.isOrientation(),i);
+                        Object[] infoB= j.replacerBateau(i);
+                        j.ajouterBateau((Case)(infoB[0]),(boolean)(infoB[1]),i);
                     }
                     System.out.println(g.toString());
                 }

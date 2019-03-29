@@ -244,11 +244,10 @@ public class Joueur {
      * Methode permettant de replacer un bateau lorsque les coordonnees de celui-ci sont mauvaises
      * @param taille Taille du bateau que l'on souhaite replacer
      * @return Informations sur le bateau a replacer
-     * @throws Exception
      */
-    public InfoPosBateau replacerBateau(int taille) throws Exception{
+    public Object[] replacerBateau(int taille){
         boolean ok =false;
-        InfoPosBateau infoBat = new InfoPosBateau(0,0,false);
+        Object[] res = new Object[2];
         while(!ok){
             System.out.println("Impossible de poser le bateau a cet endroit, changez d'endroit : ");
             Scanner sc = new Scanner(System.in);
@@ -267,13 +266,12 @@ public class Joueur {
             }
             if (verifierPosBateau(grille.gettCases()[xBat][yBat],orientation,taille)){
                 ok=true;
-                infoBat.setxB(xBat);
-                infoBat.setyB(yBat);
-                infoBat.setOrientation(orientation);
+                res[0]=grille.gettCases()[xBat][yBat];
+                res[1]=orientation;
                 break;
             }
         }
-        return infoBat;
+        return res;
     }
 
 
