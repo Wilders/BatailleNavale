@@ -121,13 +121,13 @@ public class Joueur {
         }
 
         if (!j.getGrille().gettCases()[c.getX()][c.getY()].getDispo()){
-            System.out.println(bateauCase(c).getNom()+" touché !");
+            System.out.println(bateauCase(j,c).getNom()+" touché !");
         }else {
             System.out.println("Aucun bateau touché !");
         }
-        if (!grille.gettCases()[c.getX()][c.getY()].getDispo()){
-            if (couler(bateauCase(c))){
-                System.out.println(bateauCase(c).getNom()+" coulé !");
+        if (!j.getGrille().gettCases()[c.getX()][c.getY()].getDispo()){
+            if (j.couler(bateauCase(j,c))){
+                System.out.println(bateauCase(j,c).getNom()+" coulé !");
             }
         }
     }
@@ -139,11 +139,16 @@ public class Joueur {
      * @param sc Scanner permettant la saisie au clavier
      */
     public void retirer(Joueur j, Scanner sc){
+        System.out.println("Case du tableau inaccessible : ");
         System.out.print("Entrez une nouvelle valeur de x pour tirer : ");
         int x = sc.nextInt();
         System.out.print("Entrez une nouvelle valeur de y pour tirer : ");
         int y = sc.nextInt();
-        tirer(j,j.getGrille().gettCases()[x][y]);
+        if (x<0 || x>=j.getGrille().getLargeur() || y<0 || y>=j.getGrille().getHauteur()){
+            retirer(j,sc);
+        }else {
+            tirer(j, j.getGrille().gettCases()[x][y]);
+        }
     }
 
 
@@ -185,10 +190,10 @@ public class Joueur {
      * @param c Case ou l'on cherche le bateau present sur celle-ci
      * @return Bateau present sur la case ou null s'il n'y a pas de bateau sur la case
      */
-    public Bateau bateauCase(Case c){
+    public Bateau bateauCase(Joueur j, Case c){
         try {
-            if (!grille.gettCases()[c.getX()][c.getY()].getDispo()){
-                for (Bateau b : lBateau){
+            if (!j.getGrille().gettCases()[c.getX()][c.getY()].getDispo()){
+                for (Bateau b : j.getlBateau()){
                     for (int i=0; i<b.getlPosition().size(); i++){
                         if (b.getlPosition().get(i).getX()==c.getX() && b.getlPosition().get(i).getY()==c.getY()){
                             return b;
@@ -251,25 +256,48 @@ public class Joueur {
         while(!ok){
             System.out.println("Impossible de poser le bateau a cet endroit, changez d'endroit : ");
             Scanner sc = new Scanner(System.in);
-            boolean orientation=false;
-            System.out.print("Donnez la position en x du Bateau de taille " + taille + " : ");
-            int xBat = sc.nextInt();
-            System.out.print("Donnez la position en y du Bateau de taille " + taille + " : ");
-            int yBat = sc.nextInt();
-            System.out.print("Donnez l'oriation du Bateau de taille " + taille + " (Horizontal (H) ou Vertical (V)) : ");
-            if (sc.nextLine().toUpperCase().compareTo("H") == 0) {
-                orientation = false;
-            } else {
-                if (sc.nextLine().toUpperCase().compareTo("V") == 0) {
-                    orientation = true;
-                }
-            }
+            Object[] tmp=saisirBateau(sc, taille);
+            int xBat = ((Case)(tmp[0])).getX();
+            int yBat = ((Case)(tmp[0])).getY();
+            boolean orientation = (boolean)(tmp[1]);
             if (verifierPosBateau(grille.gettCases()[xBat][yBat],orientation,taille)){
                 ok=true;
-                res[0]=grille.gettCases()[xBat][yBat];
-                res[1]=orientation;
+                res[0]=grille.gettCases()[((Case)(tmp[0])).getX()][((Case)(tmp[0])).getY()];
+                res[1]=(boolean)(tmp[1]);
                 break;
             }
+        }
+        return res;
+    }
+
+
+    /**
+     * Methode permettant la saisie de la position pour le positionner sur la grille
+     * @param sc Scanner permettant les saisies clavier
+     * @param taille Taille du bateau a placer
+     * @return
+     */
+    public Object[] saisirBateau(Scanner sc, int taille){
+        Object[] res = new Object[2];
+        System.out.print("Donnez la position en x du Bateau de taille " + taille + " : ");
+        int xBat = sc.nextInt();
+        System.out.print("Donnez la position en y du Bateau de taille " + taille + " : ");
+        int yBat = sc.nextInt();
+        System.out.print("Donnez l'oriation du Bateau de taille " + taille + " (Horizontal (H) ou Vertical (V)) : ");
+        boolean orientation=false;
+        if (sc.nextLine().toUpperCase().compareTo("H") == 0) {
+            orientation = false;
+        } else {
+            if (sc.nextLine().toUpperCase().compareTo("V") == 0) {
+                orientation = true;
+            }
+        }
+        if (xBat>=0 && xBat<grille.getLargeur() && yBat>=0 && yBat<grille.getHauteur() && verifierPosBateau(grille.gettCases()[xBat][yBat],orientation,taille)){
+            res[0]=grille.gettCases()[xBat][yBat];
+            res[1]=orientation;
+        }else {
+            System.out.println("Impossible de poser le bateau a cet endroit, changez d'endroit : ");
+            res=saisirBateau(sc,taille);
         }
         return res;
     }
