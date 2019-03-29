@@ -97,4 +97,16 @@ public class Case {
     public void setTouchee(boolean p) {
         this.touchee = p;
     }
+
+    public String toString() {
+        String res = "";
+        if(this.getTouchee() && !this.getDispo()) {
+            res = "X";
+        } else if(this.getTouchee()) {
+            res = "*";
+        } else {
+            res = "O";
+        }
+        return res;
+    }
 }

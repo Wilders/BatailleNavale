@@ -36,8 +36,8 @@ public class Grille {
         if(pLargeur < 10 || pHauteur < 10) {
             throw new Exception("Longueur ou largeur doit être supérieur ou égal à 10");
         } else {
-            this.largeur = pHauteur;
-            this.hauteur = pLargeur;
+            this.largeur = pLargeur;
+            this.hauteur = pHauteur;
         }
 
         tCases = new Case[pLargeur][pHauteur];
@@ -80,8 +80,29 @@ public class Grille {
      * @return String contenant les cases de la grille
      */
     public String toString() {
-        return "Grille{" +
-                "tCases=" + Arrays.toString(tCases) +
-                '}';
+        String res = "      ";
+        for (int k = 0; k < this.getLargeur(); k++) {
+            if(k >= 10) {
+                res += "" + k + "  ";
+            } else {
+                res += " " + k + "  ";
+            }
+        }
+        res += "\n";
+        for (int i = 0; i < this.getLargeur(); i++) {
+            if(i >= 10) {
+                res += " " + i + " ";
+            } else {
+                res += " " + i + "  ";
+            }
+            for (int j = 0; j < this.getHauteur(); j++) {
+                res += " | " + this.gettCases()[i][j].toString();
+                if(j == this.getLargeur()-1) {
+                    res += " |";
+                }
+            }
+            res += "\n";
+        }
+        return res;
     }
 }
