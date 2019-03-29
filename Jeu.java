@@ -13,11 +13,11 @@ public class Jeu {
         j.ajouterBateau(g.gettCases()[4][4], false, 4);
         j.ajouterBateau(g.gettCases()[0][0], false, 3);
 
-        j2.ajouterBateau(g.gettCases()[1][1], true, 1);
-        j2.ajouterBateau(g.gettCases()[4][8], false, 5);
+        //j2.ajouterBateau(g.gettCases()[1][1], true, 1);
+        //j2.ajouterBateau(g.gettCases()[4][8], false, 5);
         j2.ajouterBateau(g.gettCases()[2][2], false, 2);
-        j2.ajouterBateau(g.gettCases()[4][4], false, 4);
-        j2.ajouterBateau(g.gettCases()[0][0], false, 3);
+        //j2.ajouterBateau(g.gettCases()[4][4], false, 4);
+        //j2.ajouterBateau(g.gettCases()[0][0], false, 3);
 
 
         Scanner sc = new Scanner(System.in);

@@ -1,18 +1,44 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
 
+
+/**
+ * Classe modelisant un Joueur
+ */
 public class Joueur {
 
+
+    /**
+     * Grille du joueur
+     */
     private Grille grille;
 
+
+    /**
+     * Liste de bateaux du joueur
+     */
     private ArrayList<Bateau> lBateau;
 
+
+    /**
+     * Constructeur de la classe Joueur prenant en paramètre la grille du joueur
+     * et initialise automatique la liste de bateau a null
+     * @param g Grille du joueur
+     */
     public Joueur(Grille g) {
         this.grille=g;
         this.lBateau = new ArrayList<Bateau>();
     }
 
+
+    /**
+     * Methode permettant d'ajouter un bateau a la liste de bateau du joueur et prenant en parametres la case initiale
+     * du bateau a ajouter, un booleen pour l'orientation et la taille de celui-ci
+     * @param c Case initiale du bateau a ajouter
+     * @param orientation Booleen d'orientation du bateau a ajouter
+     * @param taille Taille du bateau a ajouter
+     * @throws Exception
+     */
     public void ajouterBateau(Case c, boolean orientation, int taille) throws Exception {
         switch (taille){
             case 1 :
@@ -75,6 +101,14 @@ public class Joueur {
         }
     }
 
+
+    /**
+     * Methode permettant de tirer sur un bateau ennemi prenant en parametre le joueur
+     * sur qui on veut tirer et la case sur laquelle on veut tirer
+     * @param j Joueur sur lequel on veut tirer
+     * @param c Case sur laquelle on veut tirer
+     * @throws Exception
+     */
     public void tirer(Joueur j, Case c) throws Exception{
         if (c.getX()<=j.grille.getLargeur() || c.getY()<=j.grille.getHauteur() || c.getX()>=0 || c.getY()>=0){
             if (j.grille.gettCases()[c.getX()][c.getY()].getTouchee()==false){
@@ -87,6 +121,12 @@ public class Joueur {
         }
     }
 
+
+    /**
+     * Methode permettant de savoir si un bateau est coule (entierement touche) prenant en parametre le bateau
+     * @param b Bateau a analyser
+     * @return Booleen (Bateau coule=true, sinon coule=false)
+     */
     public boolean couler(Bateau b){
         boolean res = false;
         if (b.pourcentageTouche()==100.0){
@@ -95,6 +135,11 @@ public class Joueur {
         return res;
     }
 
+
+    /**
+     * Methode permettant de savoir si un joueur a perdu la partie (tous ses bateaux ont coule)
+     * @return Booleen (Joueur a perdu=true, sinon perdu=false)
+     */
     public boolean perdu(){
         boolean res=false;
         int cpt=0;
@@ -109,6 +154,12 @@ public class Joueur {
         return res;
     }
 
+
+    /**
+     * Methode permettant de retourner la liste de bateau du joueur triee par taille des bateaux
+     * @param lB Liste des bateaux du joueur
+     * @return Liste triee par taille des bateaux du joueur
+     */
     public ArrayList<Bateau> triBateauTaille(ArrayList<Bateau> lB){
         int tmp = lB.size();
         ArrayList<Bateau> res = new ArrayList<>(tmp);
@@ -128,10 +179,11 @@ public class Joueur {
         return res;
     }
 
+
     /**
-     * NE MARCHE PAS POUR LE MOMENT
-     * @param lB
-     * @return
+     * Methode permettant de retourner la liste de bateau du joueur triee par pourcentage d'impact des bateaux
+     * @param lB Liste des bateaux du joueur
+     * @return Liste triee par pourcentage d'impact des bateaux du joueur
      */
     public ArrayList<Bateau> triBateauPourcentage(ArrayList<Bateau> lB){
         int tmp = lB.size();
@@ -152,14 +204,30 @@ public class Joueur {
         return res;
     }
 
+
+    /**
+     * Methode permettant de retourner l'attribut lBateau du joueur
+     * @return Liste des bateaux du joueur
+     */
     public ArrayList<Bateau> getlBateau() {
         return lBateau;
     }
 
+
+    /**
+     * Methode permettant de retouner l'attribut Grille du joueur
+     * @return Grille du joueur
+     */
     public Grille getGrille() {
         return grille;
     }
 
+
+    /**
+     * Methode retournant un String contenant le nombre de bateaux du joueur
+     * ainsi que les caracteristiques de ses bateaux
+     * @return String avec les informations sur les bateaux que possede le joueur
+     */
     public String toString() {
         String res = "Ce joueur possede " + this.lBateau.size() + " bateaux:\n";
         for (Bateau b : this.lBateau) {

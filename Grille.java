@@ -1,38 +1,36 @@
-import java.awt.*;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Arrays;
 
+
 /**
- * Cette classe modélise une grille
- * de jeu, elle a comme attribut une
- * largeur, une longueur et une liste
- * de cases.
+ * Classe modelisant une grille
  */
 public class Grille {
+
 
     /**
      * Largeur de la grille
      */
     private int largeur;
 
+
     /**
-     * Longueur de la grille
+     * Hauteur de la grille
      */
     private int hauteur;
 
+
     /**
-     * Liste de cases
+     * Tableau de cases de la grille
      */
     private Case[][] tCases;
 
+
     /**
-     * Constructeur de Grille, créer une grille
-     * de minimum 10x10 (taille passée en param)
-     * et remplie la liste de cases.
-     * @param pLargeur Largeur voulue
-     * @param pHauteur Longueur voulue
-     * @throws Exception La longueur et la largeur doivent être supérieur ou égal à 10
+     * Constructeur de Grille permettant de creer une grille de taille minimum
+     * 10x10 (taille passée en paramatre) et remplie la liste de cases
+     * @param pLargeur Largeur de la grille
+     * @param pHauteur Hauteur de la grille
+     * @throws Exception La largeur et la hauteur doivent etre superieures ou egales a 10
      */
     public Grille(int pLargeur, int pHauteur) throws Exception {
         if(pLargeur < 10 || pHauteur < 10) {
@@ -50,27 +48,37 @@ public class Grille {
         }
     }
 
+
     /**
-     * Getter pour l'attribut longueur
-     * @return longueur
+     * Methode permettant de retourner l'attribut Hauteur de la grille
+     * @return Hauteur de la grille
      */
     public int getHauteur() {
         return this.hauteur;
     }
 
+
     /**
-     * Getter pour l'attribut largeur
-     * @return largeur
+     * Methode permettant de retourner l'attribut Largeur de la grille
+     * @return Largeur de la grille
      */
     public int getLargeur() {
         return this.largeur;
     }
 
+
+    /**
+     * Methode permettant de retourner l'attribut tCases de la grille
+     * @return Tableau des cases de la grille
+     */
     public Case[][] gettCases() {
         return tCases;
     }
 
-    @Override
+    /**
+     * Methode permettant de retourner un String contenant les cases de la grille
+     * @return String contenant les cases de la grille
+     */
     public String toString() {
         return "Grille{" +
                 "tCases=" + Arrays.toString(tCases) +
