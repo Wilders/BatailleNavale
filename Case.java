@@ -104,8 +104,10 @@ public class Case {
             res = "X";
         } else if(this.getTouchee()) {
             res = "*";
-        } else {
+        } else if(!this.getDispo()) {
             res = "O";
+        } else {
+            res = "-";
         }
         return res;
     }

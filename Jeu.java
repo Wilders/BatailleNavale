@@ -2,55 +2,73 @@ import java.util.Scanner;
 
 public class Jeu {
     public static void main(String[] args) throws Exception {
-        Grille g = new Grille(10, 10);
-        Grille g2 = new Grille(10,10);
-        Joueur j  = new Joueur(g);
-        Joueur j2 = new Joueur(g2);
-
-        j.ajouterBateau(g.gettCases()[1][1], true, 1);
-        j.ajouterBateau(g.gettCases()[4][8], false, 5);
-        j.ajouterBateau(g.gettCases()[2][2], false, 2);
-        j.ajouterBateau(g.gettCases()[4][4], false, 4);
-        j.ajouterBateau(g.gettCases()[0][0], false, 3);
-
-        //j2.ajouterBateau(g.gettCases()[1][1], true, 1);
-        //j2.ajouterBateau(g.gettCases()[4][8], false, 5);
-        j2.ajouterBateau(g.gettCases()[2][2], false, 2);
-        //j2.ajouterBateau(g.gettCases()[4][4], false, 4);
-        //j2.ajouterBateau(g.gettCases()[0][0], false, 3);
-
-
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("A combien de joueur voulez vous jouez ? (1 ou 2) : ");
+        int choix = sc.nextInt();
 
-        while (!j.perdu() && !j2.perdu()){
-            System.out.print("Joueur 1 : Entrez le x : ");
-            int x1 = sc.nextInt();
-            System.out.print("Joueur 1 : Entrez le y : ");
-            int y1 = sc.nextInt();
+        switch (choix){
+            case 1 :
+                int largeur=0;
+                int hauteur=0;
+                while ((largeur<10 || largeur>100)||(hauteur<10 || hauteur>100)){
+                    System.out.print("Entrez la largeur de la grille souhaitée (10 minimum, 100 maximum) : ");
+                    largeur = sc.nextInt();
+                    System.out.print("Entrez la hauteur de la grille souhaitée (10 minimum, 100 maximum) : ");
+                    hauteur = sc.nextInt();
+                }
+                Grille g = new Grille(largeur,hauteur);
+                Joueur j = new Joueur(g);
+                System.out.println(g.toString());
+                for (int i=1; i<=5; i++) {
+                    System.out.print("Donnez la position en x du Bateau de taille " + i + " : ");
+                    int xBat = sc.nextInt();
+                    System.out.print("Donnez la position en y du Bateau de taille " + i + " : ");
+                    int yBat = sc.nextInt();
+                    System.out.print("Donnez l'oriation du Bateau de taille " + i + " (Horizontal (H) ou Vertical (V)) : ");
+                    boolean orientation = false;
+                    if (sc.nextLine().toUpperCase().compareTo("H") == 0) {
+                        orientation = false;
+                    } else {
+                        if (sc.nextLine().toUpperCase().compareTo("V") == 0) {
+                            orientation = true;
+                        }
+                    }
+                    if (xBat>=0 && xBat<j.getGrille().getLargeur() && yBat>=0 && yBat<j.getGrille().getHauteur() && j.verifierPosBateau(g.gettCases()[xBat][yBat],orientation,i)){
+                        j.ajouterBateau(g.gettCases()[xBat][yBat], orientation, i);
+                    }else {
+                        InfoPosBateau infoB = j.replacerBateau(i);
+                        j.ajouterBateau(g.gettCases()[infoB.getxB()][infoB.getyB()],infoB.isOrientation(),i);
+                    }
+                    System.out.println(g.toString());
+                }
+                System.out.println(j.getGrille().toString());
+                while (!j.perdu()){
+                    System.out.print("Joueur 1 : Entrez le x pour tirer : ");
+                    int x1 = sc.nextInt();
+                    System.out.print("Joueur 1 : Entrez le y pour tirer : ");
+                    int y1 = sc.nextInt();
+                    if (x1>=0 && x1<j.getGrille().getLargeur() && y1>=0 && y1<j.getGrille().getHauteur()){
+                        j.tirer(j, j.getGrille().gettCases()[x1][y1]);
+                    }else {
+                        System.out.println("Case du tableau inaccessible : ");
+                        j.retirer(j,sc);
+                    }
 
-            j.tirer(j2, j2.getGrille().gettCases()[x1][y1]);
-
-            if (j2.perdu()){
+                    System.out.println(g.toString());
+                    if (j.perdu()){
+                        break;
+                    }
+                }
+                if (j.perdu()){
+                    System.out.println("Tu as gagné !");
+                }
+                sc.close();
                 break;
-            }
-
-            System.out.print("Joueur 2 : Entrez le x : ");
-            int x2 = sc.nextInt();
-            System.out.print("Joueur 2 : Entrez le y : ");
-            int y2 = sc.nextInt();
-
-            j2.tirer(j, j.getGrille().gettCases()[x2][y2]);
+            case 2:
+                break;
+            default:
+                System.out.println("Vous ne pouvez jouer qu'à 1 ou 2 joueurs, relancez la partie !");
         }
-
-
-        if (j.perdu()){
-            System.out.println("Le joueur 1 a perdu");
-        }else {
-            if (j2.perdu()){
-                System.out.println("Le joueur 2 a perdu");
-            }
-        }
-
     }
 }

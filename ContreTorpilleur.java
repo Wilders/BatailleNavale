@@ -34,6 +34,7 @@ public class ContreTorpilleur extends Bateau {
     protected void addMultipleCases(Case e) throws Exception{
         int x = e.getX();
         int y = e.getY();
+
         if(this.getOrientation()) {
             for (int i = 0; i < 2; i++) {
                 this.addCase(grille.gettCases()[x][y+i]);

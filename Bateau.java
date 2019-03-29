@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * Classe abstraite modelisant les bateaux.
  */

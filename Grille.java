@@ -89,14 +89,14 @@ public class Grille {
             }
         }
         res += "\n";
-        for (int i = 0; i < this.getLargeur(); i++) {
+        for (int i = 0; i < this.getHauteur(); i++) {
             if(i >= 10) {
                 res += " " + i + " ";
             } else {
                 res += " " + i + "  ";
             }
-            for (int j = 0; j < this.getHauteur(); j++) {
-                res += " | " + this.gettCases()[i][j].toString();
+            for (int j = 0; j < this.getLargeur(); j++) {
+                res += " | " + this.gettCases()[j][i].toString();
                 if(j == this.getLargeur()-1) {
                     res += " |";
                 }
