@@ -38,15 +38,15 @@ public class Joueur {
      * @param c Case initiale du bateau a ajouter
      * @param orientation Booleen d'orientation du bateau a ajouter
      * @param taille Taille du bateau a ajouter
-     * @throws Exception
+     * @throws BateauException
      */
-    public void ajouterBateau(Case c, boolean orientation, int taille) throws Exception {
+    public void ajouterBateau(Case c, boolean orientation, int taille) throws BateauException {
         switch (taille){
             case 1 :
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof Torpilleur){
-                            throw new Exception("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est déjà dans la liste");
                         }
                     }
                 }
@@ -57,7 +57,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof ContreTorpilleur){
-                            throw new Exception("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est déjà dans la liste");
                         }
                     }
                 }
@@ -68,7 +68,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof SousMarin){
-                            throw new Exception("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est déjà dans la liste");
                         }
                     }
                 }
@@ -79,7 +79,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof Croiseur){
-                            throw new Exception("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est déjà dans la liste");
                         }
                     }
                 }
@@ -90,7 +90,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof PorteAvions){
-                            throw new Exception("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est déjà dans la liste");
                         }
                     }
                 }
@@ -98,7 +98,7 @@ public class Joueur {
                 lBateau.add(po);
                 break;
             default:
-                throw new Exception("Bateau invalide");
+                throw new BateauException("Bateau invalide");
         }
     }
 
@@ -108,7 +108,6 @@ public class Joueur {
      * sur qui on veut tirer et la case sur laquelle on veut tirer
      * @param j Joueur sur lequel on veut tirer
      * @param c Case sur laquelle on veut tirer
-     * @throws Exception
      */
     public void tirer(Joueur j, Case c){
 

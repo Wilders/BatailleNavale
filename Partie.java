@@ -15,9 +15,9 @@ public class Partie {
 
     /**
      * Méthode permettant de jouer en mode mono joueur, contre soit meme
-     * @throws Exception
+     * @throws BateauException,GrilleException,CaseException
      */
-    public void monoJoueur() throws Exception{
+    public void monoJoueur() throws BateauException,GrilleException,CaseException{
         Scanner sc = new Scanner(System.in);
         Grille g = creerGrille(sc);
         Joueur j = new Joueur(g);
@@ -48,9 +48,9 @@ public class Partie {
 
     /**
      * Methode permettant de jouer a deux joueurs
-     * @throws Exception
+     * @throws BateauException,GrilleException,CaseException
      */
-    public void deuxJoueurs() throws Exception{
+    public void deuxJoueurs() throws BateauException,GrilleException,CaseException{
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
 
@@ -121,9 +121,9 @@ public class Partie {
      * Methode permettant de creer la grille avec des entrees clavier en debut de partie
      * @param sc Scanner permettant les saisies clavier
      * @return  Grille cree
-     * @throws Exception
+     * @throws GrilleException,CaseException
      */
-    public Grille creerGrille(Scanner sc) throws Exception{
+    public Grille creerGrille(Scanner sc) throws GrilleException,CaseException{
         int largeur=0;
         int hauteur=0;
         System.out.print("Entrez la largeur de la grille souhaitée (10 minimum, 100 maximum) : ");
@@ -146,9 +146,9 @@ public class Partie {
      * Methode permettant de saisir les bateaux pour les ajouter a la partie
      * @param sc Scanner permettant la saisie clavier
      * @param j Joueur pour lequelle on veut ajouter les bateaux
-     * @throws Exception
+     * @throws BateauException
      */
-    public void saisieBateau(Scanner sc, Joueur j) throws Exception{
+    public void saisieBateau(Scanner sc, Joueur j) throws BateauException{
         for (int i=1; i<=5; i++) {
             Object[] tmp=j.saisirBateau(sc,i);
             int xBat = ((Case)(tmp[0])).getX();
