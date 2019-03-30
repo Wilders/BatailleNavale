@@ -17,9 +17,9 @@ public class SousMarin extends Bateau {
      * @param g Grille dans laquelle on place le bateau
      * @param o Booleen Orientation
      * @param c Case initiale du bateau
-     * @throws Exception
+     * @throws BateauException
      */
-    public SousMarin(Grille g, boolean o, Case c) throws Exception {
+    public SousMarin(Grille g, boolean o, Case c) throws BateauException {
         super(g, o);
         this.nom = "Sous Marin";
         this.addMultipleCases(c);
@@ -29,9 +29,9 @@ public class SousMarin extends Bateau {
     /**
      * Methode permettant d'ajouter toutes les cases du bateau dans la liste de case de celui-ci
      * @param e Case initiale de la position du bateau les autres cases sont definies par l'orientation et la taille du bateau
-     * @throws Exception
+     * @throws BateauException
      */
-    protected void addMultipleCases(Case e) throws Exception {
+    protected void addMultipleCases(Case e) throws BateauException {
         int x = e.getX();
         int y = e.getY();
         if(this.getOrientation()) {

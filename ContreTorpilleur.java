@@ -17,9 +17,9 @@ public class ContreTorpilleur extends Bateau {
      * @param g Grille dans laquelle on place le bateau
      * @param o Booleen Orientation
      * @param c Case initiale du bateau
-     * @throws Exception
+     * @throws BateauException
      */
-    public ContreTorpilleur(Grille g, boolean o, Case c) throws Exception{
+    public ContreTorpilleur(Grille g, boolean o, Case c) throws BateauException{
         super(g, o);
         this.nom = "Contre Torpilleur";
         this.addMultipleCases(c);
@@ -31,7 +31,7 @@ public class ContreTorpilleur extends Bateau {
      * @param e Case initiale de la position du bateau les autres cases sont definies par l'orientation et la taille du bateau
      * @throws Exception
      */
-    protected void addMultipleCases(Case e) throws Exception{
+    protected void addMultipleCases(Case e) throws BateauException{
         int x = e.getX();
         int y = e.getY();
 

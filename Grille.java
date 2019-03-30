@@ -30,11 +30,12 @@ public class Grille {
      * 10x10 (taille passée en paramatre) et remplie la liste de cases
      * @param pLargeur Largeur de la grille
      * @param pHauteur Hauteur de la grille
-     * @throws Exception La largeur et la hauteur doivent etre superieures ou egales a 10
+     * @throws GrilleException La largeur et la hauteur doivent être supérieures ou égal à 10 et inférieures ou égales à 100
+     * @throws CaseException
      */
-    public Grille(int pLargeur, int pHauteur) throws Exception {
+    public Grille(int pLargeur, int pHauteur) throws GrilleException, CaseException {
         if(pLargeur < 10 || pHauteur < 10) {
-            throw new Exception("Longueur ou largeur doit être supérieur ou égal à 10");
+            throw new GrilleException("La largeur et la hauteur doivent être supérieures ou égal à 10 et inférieures ou égales à 100");
         } else {
             this.largeur = pLargeur;
             this.hauteur = pHauteur;

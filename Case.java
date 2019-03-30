@@ -31,11 +31,11 @@ public class Case {
      * La case est automatiquement initialisee a touchee=false car aucun joueur n'a tire sur la case initialement
      * @param x Abscisse de la case
      * @param y Ordonnee de la case
-     * @throws Exception
+     * @throws CaseException
      */
-    public Case(int x, int y) throws Exception {
+    public Case(int x, int y) throws CaseException {
         if(x<0 || y<0) {
-            throw new Exception("La case ne peut pas être dans une position négative");
+            throw new CaseException("La case ne peut pas être dans une position négative");
         } else {
             this.x = x;
             this.y = y;

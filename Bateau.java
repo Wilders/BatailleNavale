@@ -42,15 +42,15 @@ public abstract class Bateau {
     /**
      * Methode permettant d'ajouter une case a la liste de case du bateau (lPosition)
      * @param e Case que l'on veut ajouter dans la liste de case du bateau
-     * @throws Exception
+     * @throws BateauException
      */
-    protected void addCase(Case e) throws Exception {
+    protected void addCase(Case e) throws BateauException {
         if(e.getX() > this.getGrille().getLargeur() || e.getY() > this.getGrille().getHauteur()) {
-            throw new Exception("La case n'est pas dans la grille");
+            throw new BateauException("La case n'est pas dans la grille");
         }
 
         if(grille.gettCases()[e.getX()][e.getY()].getDispo()==false) {
-            throw new Exception("La case n'est pas disponible");
+            throw new BateauException("La case n'est pas disponible");
         }
 
         this.lPosition.add(e);
@@ -62,9 +62,9 @@ public abstract class Bateau {
      * Methode abstraite permettant d'ajouter toutes les cases d'un bateau dans
      * la liste de case de celui-ci (Methode definie dans chaque classe heritant de Bateau)
      * @param e Case initiale de la position du bateau les autres cases sont definies par l'orientation et la taille du bateau
-     * @throws Exception
+     * @throws BateauException
      */
-    protected abstract void addMultipleCases(Case e) throws Exception;
+    protected abstract void addMultipleCases(Case e) throws BateauException;
 
 
     /**
