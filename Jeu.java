@@ -20,5 +20,6 @@ public class Jeu {
             default:
                 System.out.println("Vous ne pouvez jouer qu'à 1 ou 2 joueurs, relancez la partie !");
         }
+        sc.close();
     }
 }
