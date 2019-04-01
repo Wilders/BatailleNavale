@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 
 /**
- * Classe Partie consistant à stocker les différentes méthodes pour lancer les différents modes de jeu
+ * Classe Partie consistant a stocker les differentes methodes pour lancer les differents modes de jeu
  */
 public class Partie {
 
@@ -14,7 +14,7 @@ public class Partie {
 
 
     /**
-     * Méthode permettant de jouer en mode mono joueur, contre soit meme
+     * Methode permettant de jouer en mode mono joueur, contre soit meme
      * @throws BateauException,GrilleException,CaseException
      */
     public void monoJoueur() throws BateauException,GrilleException,CaseException{
@@ -40,7 +40,7 @@ public class Partie {
             }
         }
         if (j.perdu()){
-            System.out.println("Tu as gagné !");
+            System.out.println("Tu as gagne !");
         }
         sc.close();
     }
@@ -107,10 +107,10 @@ public class Partie {
             }
         }
         if (j1.perdu()){
-            System.out.println(nomJ2.toUpperCase()+" a gagné !");
+            System.out.println(nomJ2.toUpperCase()+" a gagne !");
         }
         if (j2.perdu()){
-            System.out.println(nomJ1.toUpperCase()+" a gagné !");
+            System.out.println(nomJ1.toUpperCase()+" a gagne !");
         }
         sc.close();
         sc2.close();
@@ -126,15 +126,15 @@ public class Partie {
     public Grille creerGrille(Scanner sc) throws GrilleException,CaseException{
         int largeur=0;
         int hauteur=0;
-        System.out.print("Entrez la largeur de la grille souhaitée (10 minimum, 100 maximum) : ");
+        System.out.print("Entrez la largeur de la grille souhaitee (10 minimum, 100 maximum) : ");
         largeur = sc.nextInt();
-        System.out.print("Entrez la hauteur de la grille souhaitée (10 minimum, 100 maximum) : ");
+        System.out.print("Entrez la hauteur de la grille souhaitee (10 minimum, 100 maximum) : ");
         hauteur = sc.nextInt();
         while ((largeur<10 || largeur>100)||(hauteur<10 || hauteur>100)){
             System.out.println("Taille de la grille trop grande ou trop petite, entrez de nouvelles dimensions : ");
-            System.out.print("Entrez la largeur de la grille souhaitée (10 minimum, 100 maximum) : ");
+            System.out.print("Entrez la largeur de la grille souhaitee (10 minimum, 100 maximum) : ");
             largeur = sc.nextInt();
-            System.out.print("Entrez la hauteur de la grille souhaitée (10 minimum, 100 maximum) : ");
+            System.out.print("Entrez la hauteur de la grille souhaitee (10 minimum, 100 maximum) : ");
             hauteur = sc.nextInt();
         }
         Grille g = new Grille(largeur,hauteur);

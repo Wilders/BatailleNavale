@@ -1,5 +1,5 @@
 /**
- * Classe PorteAvions héritant de la classe Bateau
+ * Classe PorteAvions heritant de la classe Bateau
  */
 public class PorteAvions extends Bateau {
 

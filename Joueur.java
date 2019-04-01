@@ -22,7 +22,7 @@ public class Joueur {
 
 
     /**
-     * Constructeur de la classe Joueur prenant en paramètre la grille du joueur
+     * Constructeur de la classe Joueur prenant en parametre la grille du joueur
      * et initialise automatique la liste de bateau a null
      * @param g Grille du joueur
      */
@@ -46,7 +46,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof Torpilleur){
-                            throw new BateauException("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est deja dans la liste");
                         }
                     }
                 }
@@ -57,7 +57,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof ContreTorpilleur){
-                            throw new BateauException("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est deja dans la liste");
                         }
                     }
                 }
@@ -68,7 +68,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof SousMarin){
-                            throw new BateauException("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est deja dans la liste");
                         }
                     }
                 }
@@ -79,7 +79,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof Croiseur){
-                            throw new BateauException("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est deja dans la liste");
                         }
                     }
                 }
@@ -90,7 +90,7 @@ public class Joueur {
                 if(!this.lBateau.isEmpty()) {
                     for (Bateau b : lBateau){
                         if (b instanceof PorteAvions){
-                            throw new BateauException("Ce bateau est déjà dans la liste");
+                            throw new BateauException("Ce bateau est deja dans la liste");
                         }
                     }
                 }
@@ -115,25 +115,25 @@ public class Joueur {
             j.grille.gettCases()[c.getX()][c.getY()].setTouchee(true);
         }else {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Case déjà touchée :");
+            System.out.println("Case deja touchee :");
             retirer(j, sc);
         }
 
         if (!j.getGrille().gettCases()[c.getX()][c.getY()].getDispo()){
-            System.out.println(bateauCase(j,c).getNom()+" touché !");
+            System.out.println(bateauCase(j,c).getNom()+" touche !");
         }else {
-            System.out.println("Aucun bateau touché !");
+            System.out.println("Aucun bateau touche !");
         }
         if (!j.getGrille().gettCases()[c.getX()][c.getY()].getDispo()){
             if (j.couler(bateauCase(j,c))){
-                System.out.println(bateauCase(j,c).getNom()+" coulé !");
+                System.out.println(bateauCase(j,c).getNom()+" coule !");
             }
         }
     }
 
 
     /**
-     * Methode permettant de retirer si le tire ne s'est pas bien passé
+     * Methode permettant de retirer si le tire ne s'est pas bien passe
      * @param j Joueur sur lequel on veut tirer
      * @param sc Scanner permettant la saisie au clavier
      */

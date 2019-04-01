@@ -35,7 +35,7 @@ public class Case {
      */
     public Case(int x, int y) throws CaseException {
         if(x<0 || y<0) {
-            throw new CaseException("La case ne peut pas être dans une position négative");
+            throw new CaseException("La case ne peut pas être dans une position negative");
         } else {
             this.x = x;
             this.y = y;

@@ -1,5 +1,5 @@
 /**
- * Classe SousMarin héritant de la classe Bateau
+ * Classe SousMarin heritant de la classe Bateau
  */
 public class SousMarin extends Bateau {
 

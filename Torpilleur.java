@@ -1,5 +1,5 @@
 /**
- * Classe Torpilleur héritant de la classe Bateau
+ * Classe Torpilleur heritant de la classe Bateau
  */
 public class Torpilleur extends Bateau {
 

@@ -143,7 +143,7 @@ public abstract class Bateau {
             }
             res+= "]";
         } else {
-            res = "[Pas encore posé]";
+            res = "[Pas encore pose]";
         }
         return res;
     }

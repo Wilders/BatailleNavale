@@ -18,7 +18,7 @@ public class Jeu {
                 partie.deuxJoueurs();
                 break;
             default:
-                System.out.println("Vous ne pouvez jouer qu'à 1 ou 2 joueurs, relancez la partie !");
+                System.out.println("Vous ne pouvez jouer qu'a 1 ou 2 joueurs, relancez la partie !");
         }
         sc.close();
     }

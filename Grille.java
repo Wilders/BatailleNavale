@@ -27,14 +27,14 @@ public class Grille {
 
     /**
      * Constructeur de Grille permettant de creer une grille de taille minimum
-     * 10x10 (taille passée en paramatre) et remplie la liste de cases
+     * 10x10 (taille passee en paramatre) et remplie la liste de cases
      * @param pLargeur Largeur de la grille
      * @param pHauteur Hauteur de la grille
      * @throws GrilleException,CaseException
      */
     public Grille(int pLargeur, int pHauteur) throws GrilleException, CaseException {
         if(pLargeur < 10 || pHauteur < 10) {
-            throw new GrilleException("La largeur et la hauteur doivent être supérieures ou égal à 10 et inférieures ou égales à 100");
+            throw new GrilleException("La largeur et la hauteur doivent être superieures ou egal a 10 et inferieures ou egales a 100");
         } else {
             this.largeur = pLargeur;
             this.hauteur = pHauteur;

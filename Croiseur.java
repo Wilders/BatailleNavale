@@ -1,5 +1,5 @@
 /**
- * Classe Croiseur héritant de la classe Bateau
+ * Classe Croiseur heritant de la classe Bateau
  */
 public class Croiseur extends Bateau {
 
