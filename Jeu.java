@@ -7,15 +7,16 @@ import java.util.Scanner;
 public class Jeu {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        Partie partie = new Partie();
         System.out.print("A combien de joueur voulez vous jouez ? (1 ou 2) : ");
         int choix = sc.nextInt();
         switch (choix){
             case 1 :
-                partie.monoJoueur();
+                MonoJoueur partieMonoJoueur = new MonoJoueur();
+                partieMonoJoueur.monoJoueur();
                 break;
             case 2:
-                partie.deuxJoueurs();
+                DeuxJoueurs partieDeuxJoueurs = new DeuxJoueurs();
+                partieDeuxJoueurs.deuxJoueurs();
                 break;
             default:
                 System.out.println("Vous ne pouvez jouer qu'a 1 ou 2 joueurs, relancez la partie !");
