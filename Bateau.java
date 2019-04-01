@@ -1,10 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Classe abstraite modelisant les bateaux.
  */
-public abstract class Bateau {
+public abstract class Bateau implements Serializable {
 
 
     /**

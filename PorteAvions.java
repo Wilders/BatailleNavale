@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Classe PorteAvions heritant de la classe Bateau
  */
-public class PorteAvions extends Bateau {
+public class PorteAvions extends Bateau implements Serializable {
 
     /**
      * Attribut correspondant au nom de la classe

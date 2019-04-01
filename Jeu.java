@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 
 /**
  * Classe Jeu consistant a lancer le jeu et a choisir le mode de jeu
  */
-public class Jeu {
+public class Jeu implements Serializable {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.print("A combien de joueur voulez vous jouez ? (1 ou 2) : ");

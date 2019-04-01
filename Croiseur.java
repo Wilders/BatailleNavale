@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Classe Croiseur heritant de la classe Bateau
  */
-public class Croiseur extends Bateau {
+public class Croiseur extends Bateau implements Serializable {
 
 
     /**

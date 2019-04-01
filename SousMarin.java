@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Classe SousMarin heritant de la classe Bateau
  */
-public class SousMarin extends Bateau {
+public class SousMarin extends Bateau implements Serializable {
 
 
     /**

@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Classe modelisant une case
  */
-public class Case {
+public class Case implements Serializable {
 
 
     /**

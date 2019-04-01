@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.Arrays;
 
 
 /**
  * Classe modelisant une grille
  */
-public class Grille {
+public class Grille implements Serializable {
 
 
     /**

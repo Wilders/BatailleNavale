@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -6,7 +7,7 @@ import java.util.Scanner;
 /**
  * Classe modelisant un Joueur
  */
-public class Joueur {
+public class Joueur implements Serializable {
 
 
     /**
@@ -19,6 +20,12 @@ public class Joueur {
      * Liste de bateaux du joueur
      */
     private ArrayList<Bateau> lBateau;
+
+
+    /**
+     * Nom du joueur
+     */
+    private String nomJoueur;
 
 
     /**
@@ -367,6 +374,24 @@ public class Joueur {
      */
     public Grille getGrille() {
         return grille;
+    }
+
+
+    /**
+     * Methode permettant de modifier l'attribut Nom du joueur
+     * @param nomJoueur Nouveau nom du joueur
+     */
+    public void setNomJoueur(String nomJoueur) {
+        this.nomJoueur = nomJoueur;
+    }
+
+
+    /**
+     * Methode permettant de retourner l'attribut Nom du joueur
+     * @return Nom du joueur
+     */
+    public String getNomJoueur() {
+        return nomJoueur;
     }
 
 

@@ -1,13 +1,21 @@
+import java.io.*;
 import java.util.Scanner;
 
 
 /**
  * Classe abstraite Partie consistant a stocker les differentes methodes pour lancer les differents modes de jeu
  */
-public abstract class Partie {
+public abstract class Partie implements Serializable {
 
-
+    /**
+     * Joueur 1 de la partie
+     */
     protected Joueur j1;
+
+
+    /**
+     * Joueur 2 de la partie
+     */
     protected Joueur j2;
 
 
@@ -17,18 +25,48 @@ public abstract class Partie {
     public Partie(){}
 
 
+    public static void sauvegarderMono(String dest, Joueur j) throws IOException {
+        ObjectOutputStream d = new ObjectOutputStream(new FileOutputStream(dest));
+        d.writeObject(j);
+        d.close();
+    }
+
+
+    public static Joueur chargerMono(String source) throws IOException, ClassNotFoundException {
+        ObjectInputStream di = new ObjectInputStream(new FileInputStream(source));
+        Joueur j = (Joueur)(di.readObject());
+        di.close();
+        return j;
+    }
+
+
+    public static void sauvegarderDeuxJoueurs(String dest, Partie partie) throws IOException {
+        ObjectOutputStream d = new ObjectOutputStream(new FileOutputStream(dest));
+        d.writeObject(partie);
+        d.close();
+    }
+
+
+    public static Partie chargerDeuxJoueurs(String source) throws IOException, ClassNotFoundException {
+        ObjectInputStream di = new ObjectInputStream(new FileInputStream(source));
+        Partie partie = (Partie)(di.readObject());
+        di.close();
+        return partie;
+    }
+
+
     /**
      * Methode abstraite permettant de jouer en mode mono joueur, contre soit meme
      * @throws BateauException,GrilleException,CaseException
      */
-    public abstract void monoJoueur() throws BateauException,GrilleException,CaseException;
+    public abstract void monoJoueur() throws BateauException, GrilleException, CaseException, IOException, ClassNotFoundException;
 
 
     /**
      * Methode abstraite permettant de jouer a deux joueurs
      * @throws BateauException,GrilleException,CaseException
      */
-    public abstract void deuxJoueurs() throws BateauException,GrilleException,CaseException;
+    public abstract void deuxJoueurs() throws BateauException, GrilleException, CaseException, IOException;
 
 
     /**

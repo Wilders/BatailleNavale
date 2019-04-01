@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Classe Torpilleur heritant de la classe Bateau
  */
-public class Torpilleur extends Bateau {
+public class Torpilleur extends Bateau implements Serializable {
 
 
     /**
