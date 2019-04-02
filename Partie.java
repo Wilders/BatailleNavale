@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -78,10 +79,21 @@ public abstract class Partie implements Serializable {
     public Grille creerGrille(Scanner sc) throws GrilleException,CaseException{
         int largeur=0;
         int hauteur=0;
-        System.out.print("Entrez la largeur de la grille souhaitee (10 minimum, 100 maximum) : ");
-        largeur = sc.nextInt();
-        System.out.print("Entrez la hauteur de la grille souhaitee (10 minimum, 100 maximum) : ");
-        hauteur = sc.nextInt();
+        boolean ok=false;
+        while(!ok){
+            try {
+                System.out.print("Entrez la largeur de la grille souhaitee (10 minimum, 100 maximum) : ");
+                largeur = sc.nextInt();
+                sc.nextLine();
+                System.out.print("Entrez la hauteur de la grille souhaitee (10 minimum, 100 maximum) : ");
+                hauteur = sc.nextInt();
+                sc.nextLine();
+                ok=true;
+            }catch (InputMismatchException ime){
+                System.out.println("Erreur, entrez deux entiers : ");
+                sc.nextLine();
+            }
+        }
         while ((largeur<10 || largeur>100)||(hauteur<10 || hauteur>100)){
             System.out.println("Taille de la grille trop grande ou trop petite, entrez de nouvelles dimensions : ");
             System.out.print("Entrez la largeur de la grille souhaitee (10 minimum, 100 maximum) : ");

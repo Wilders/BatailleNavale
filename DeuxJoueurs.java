@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -35,20 +36,46 @@ public class DeuxJoueurs extends Partie implements Serializable {
                 this.j2=p.j2;
                 System.out.println(j1.getGrille().toString());
                 while(!j1.perdu() && !j2.perdu()){
-                    System.out.print(j1.getNomJoueur().toUpperCase()+" : Entrez le x pour tirer : ");
-                    int x1 = sc.nextInt();
-                    System.out.print(j1.getNomJoueur().toUpperCase()+" : Entrez le y pour tirer : ");
-                    int y1 = sc.nextInt();
+                    int x1=0;
+                    int y1=0;
+                    boolean ok = false;
+                    while (!ok){
+                        try {
+                            System.out.print(j1.getNomJoueur().toUpperCase()+" : Entrez le x pour tirer : ");
+                            x1 = sc.nextInt();
+                            sc.nextLine();
+                            System.out.print(j1.getNomJoueur().toUpperCase()+" : Entrez le y pour tirer : ");
+                            y1 = sc.nextInt();
+                            sc.nextLine();
+                            ok=true;
+                        }catch (InputMismatchException ime){
+                            System.out.println("Erreur, entrez deux entiers : ");
+                            sc.nextLine();
+                        }
+                    }
                     if (x1>=0 && x1<j2.getGrille().getLargeur() && y1>=0 && y1<j2.getGrille().getHauteur()){
                         j1.tirer(j2, j2.getGrille().gettCases()[x1][y1]);
                     }else {
                         j1.retirer(j2,sc);
                     }
                     System.out.println(j2.getGrille().toString());
-                    System.out.print(j2.getNomJoueur().toUpperCase()+" : Entrez le x pour tirer : ");
-                    int x2 = sc.nextInt();
-                    System.out.print(j2.getNomJoueur().toUpperCase()+" : Entrez le y pour tirer : ");
-                    int y2 = sc.nextInt();
+                    int x2=0;
+                    int y2=0;
+                    ok = false;
+                    while (!ok){
+                        try {
+                            System.out.print(j2.getNomJoueur().toUpperCase()+" : Entrez le x pour tirer : ");
+                            x2 = sc.nextInt();
+                            sc.nextLine();
+                            System.out.print(j2.getNomJoueur().toUpperCase()+" : Entrez le y pour tirer : ");
+                            y2 = sc.nextInt();
+                            sc.nextLine();
+                            ok=true;
+                        }catch (InputMismatchException ime){
+                            System.out.println("Erreur, entrez deux entiers : ");
+                            sc.nextLine();
+                        }
+                    }
                     if (x2>=0 && x2<j1.getGrille().getLargeur() && y2>=0 && y2<j1.getGrille().getHauteur()){
                         j2.tirer(j1, j1.getGrille().gettCases()[x2][y2]);
                     }else {
@@ -123,20 +150,46 @@ public class DeuxJoueurs extends Partie implements Serializable {
         saisieBateau(sc,j2);
 
         while(!j1.perdu() && !j2.perdu()){
-            System.out.print(nomJ1.toUpperCase()+" : Entrez le x pour tirer : ");
-            int x1 = sc.nextInt();
-            System.out.print(nomJ1.toUpperCase()+" : Entrez le y pour tirer : ");
-            int y1 = sc.nextInt();
+            int x1=0;
+            int y1=0;
+            boolean ok = false;
+            while (!ok){
+                try {
+                    System.out.print(j1.getNomJoueur().toUpperCase()+" : Entrez le x pour tirer : ");
+                    x1 = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print(j1.getNomJoueur().toUpperCase()+" : Entrez le y pour tirer : ");
+                    y1 = sc.nextInt();
+                    sc.nextLine();
+                    ok=true;
+                }catch (InputMismatchException ime){
+                    System.out.println("Erreur, entrez deux entiers : ");
+                    sc.nextLine();
+                }
+            }
             if (x1>=0 && x1<j2.getGrille().getLargeur() && y1>=0 && y1<j2.getGrille().getHauteur()){
                 j1.tirer(j2, j2.getGrille().gettCases()[x1][y1]);
             }else {
                 j1.retirer(j2,sc);
             }
             System.out.println(g2.toString());
-            System.out.print(nomJ2.toUpperCase()+" : Entrez le x pour tirer : ");
-            int x2 = sc.nextInt();
-            System.out.print(nomJ2.toUpperCase()+" : Entrez le y pour tirer : ");
-            int y2 = sc.nextInt();
+            int x2=0;
+            int y2=0;
+            ok = false;
+            while (!ok){
+                try {
+                    System.out.print(j2.getNomJoueur().toUpperCase()+" : Entrez le x pour tirer : ");
+                    x2 = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print(j2.getNomJoueur().toUpperCase()+" : Entrez le y pour tirer : ");
+                    y2 = sc.nextInt();
+                    sc.nextLine();
+                    ok=true;
+                }catch (InputMismatchException ime){
+                    System.out.println("Erreur, entrez deux entiers : ");
+                    sc.nextLine();
+                }
+            }
             if (x2>=0 && x2<j1.getGrille().getLargeur() && y2>=0 && y2<j1.getGrille().getHauteur()){
                 j2.tirer(j1, j1.getGrille().gettCases()[x2][y2]);
             }else {

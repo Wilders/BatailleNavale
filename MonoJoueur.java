@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -32,10 +33,23 @@ public class MonoJoueur extends Partie implements Serializable {
                 j1=chargerMono("saveMonoJoueur");
                 System.out.println(j1.getGrille().toString());
                 while (!j1.perdu()){
-                    System.out.print("Joueur 1 : Entrez le x pour tirer : ");
-                    int x1 = sc.nextInt();
-                    System.out.print("Joueur 1 : Entrez le y pour tirer : ");
-                    int y1 = sc.nextInt();
+                    int x1=0;
+                    int y1=0;
+                    boolean ok = false;
+                    while (!ok){
+                        try {
+                            System.out.print("Joueur 1 : Entrez le x pour tirer : ");
+                            x1 = sc.nextInt();
+                            sc.nextLine();
+                            System.out.print("Joueur 1 : Entrez le y pour tirer : ");
+                            y1 = sc.nextInt();
+                            sc.nextLine();
+                            ok=true;
+                        }catch (InputMismatchException ime){
+                            System.out.println("Erreur, entrez deux entiers : ");
+                            sc.nextLine();
+                        }
+                    }
                     if (x1>=0 && x1<j1.getGrille().getLargeur() && y1>=0 && y1<j1.getGrille().getHauteur()){
                         j1.tirer(j1, j1.getGrille().gettCases()[x1][y1]);
                     }else {
@@ -67,10 +81,23 @@ public class MonoJoueur extends Partie implements Serializable {
                 System.out.println(g.toString());
                 saisieBateau(sc,j1);
                 while (!j1.perdu()){
-                    System.out.print("Joueur 1 : Entrez le x pour tirer : ");
-                    int x1 = sc.nextInt();
-                    System.out.print("Joueur 1 : Entrez le y pour tirer : ");
-                    int y1 = sc.nextInt();
+                    int x1=0;
+                    int y1=0;
+                    boolean ok = false;
+                    while (!ok){
+                        try {
+                            System.out.print("Joueur 1 : Entrez le x pour tirer : ");
+                            x1 = sc.nextInt();
+                            sc.nextLine();
+                            System.out.print("Joueur 1 : Entrez le y pour tirer : ");
+                            y1 = sc.nextInt();
+                            sc.nextLine();
+                            ok=true;
+                        }catch (InputMismatchException ime){
+                            System.out.println("Erreur, entrez deux entiers : ");
+                            sc.nextLine();
+                        }
+                    }
                     if (x1>=0 && x1<j1.getGrille().getLargeur() && y1>=0 && y1<j1.getGrille().getHauteur()){
                         j1.tirer(j1, j1.getGrille().gettCases()[x1][y1]);
                     }else {
@@ -102,10 +129,23 @@ public class MonoJoueur extends Partie implements Serializable {
             System.out.println(g.toString());
             saisieBateau(sc,j1);
             while (!j1.perdu()){
-                System.out.print("Joueur 1 : Entrez le x pour tirer : ");
-                int x1 = sc.nextInt();
-                System.out.print("Joueur 1 : Entrez le y pour tirer : ");
-                int y1 = sc.nextInt();
+                int x1=0;
+                int y1=0;
+                boolean ok = false;
+                while (!ok){
+                    try {
+                        System.out.print("Joueur 1 : Entrez le x pour tirer : ");
+                        x1 = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Joueur 1 : Entrez le y pour tirer : ");
+                        y1 = sc.nextInt();
+                        sc.nextLine();
+                        ok=true;
+                    }catch (InputMismatchException ime){
+                        System.out.println("Erreur, entrez deux entiers : ");
+                        sc.nextLine();
+                    }
+                }
                 if (x1>=0 && x1<j1.getGrille().getLargeur() && y1>=0 && y1<j1.getGrille().getHauteur()){
                     j1.tirer(j1, j1.getGrille().gettCases()[x1][y1]);
                 }else {

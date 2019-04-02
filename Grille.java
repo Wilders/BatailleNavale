@@ -104,6 +104,8 @@ public class Grille implements Serializable {
             }
             res += "\n";
         }
+
+        res += "\n               Legende :\n- : Case sans bateau qui n'est pas touchee\nO : Case avec un bateau pas touchee\nX : Case touchee avec un bateau\n* : Case touchee mais sans bateau\n";
         return res;
     }
 }

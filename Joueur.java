@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.ListIterator;
 import java.util.Scanner;
 
@@ -285,16 +286,30 @@ public class Joueur implements Serializable {
      */
     public Object[] saisirBateau(Scanner sc, int taille){
         Object[] res = new Object[2];
-        System.out.print("Donnez la position en x du Bateau de taille " + taille + " : ");
-        int xBat = sc.nextInt();
-        System.out.print("Donnez la position en y du Bateau de taille " + taille + " : ");
-        int yBat = sc.nextInt();
+        int xBat=0;
+        int yBat=0;
+        boolean ok=false;
+        while (!ok){
+            try {
+                System.out.print("Donnez la position en x du Bateau de taille " + taille + " : ");
+                xBat = sc.nextInt();
+                sc.nextLine();
+                System.out.print("Donnez la position en y du Bateau de taille " + taille + " : ");
+                yBat = sc.nextInt();
+                sc.nextLine();
+                ok=true;
+            }catch (InputMismatchException ime){
+                System.out.println("Erreur, entrez deux entiers : ");
+                sc.nextLine();
+            }
+        }
         System.out.print("Donnez l'oriation du Bateau de taille " + taille + " (Horizontal (H) ou Vertical (V)) : ");
         boolean orientation=false;
-        if (sc.nextLine().toUpperCase().compareTo("H") == 0) {
+        String tmp=sc.nextLine();
+        if (tmp.toUpperCase().compareTo("H") == 0) {
             orientation = false;
         } else {
-            if (sc.nextLine().toUpperCase().compareTo("V") == 0) {
+            if (tmp.toUpperCase().compareTo("V") == 0) {
                 orientation = true;
             }
         }
