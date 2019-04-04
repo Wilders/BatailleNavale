@@ -24,7 +24,7 @@ public class DeuxJoueurs extends Partie implements Serializable {
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
 
-        System.out.print("Voulez vous chargez la derniere partie en cours ? (Oui(o) / Non(n) : ");
+        System.out.print("Voulez vous chargez la derniere partie en cours ? (Oui/Non) : ");
         boolean charger=false;
         if (sc.nextLine().toUpperCase().compareTo("OUI")==0){
             charger=true;
@@ -88,7 +88,7 @@ public class DeuxJoueurs extends Partie implements Serializable {
                     if (j2.perdu()){
                         break;
                     }
-                    System.out.println("Voulez-vous sauvegarder et quitter votre partie ? (Oui(o) / Non(n) : ");
+                    System.out.println("Voulez-vous sauvegarder et quitter votre partie ? (Oui/Non) : ");
                     boolean sauvegarder=false;
                     if (sc2.nextLine().toUpperCase().compareTo("OUI")==0){
                         sauvegarder=true;
@@ -203,7 +203,7 @@ public class DeuxJoueurs extends Partie implements Serializable {
             if (j2.perdu()){
                 break;
             }
-            System.out.println("Voulez-vous sauvegarder et quitter votre partie ? (Oui(o) / Non(n) : ");
+            System.out.println("Voulez-vous sauvegarder et quitter votre partie ? (Oui/Non) : ");
             boolean sauvegarder=false;
             if (sc2.nextLine().toUpperCase().compareTo("OUI")==0){
                 sauvegarder=true;
