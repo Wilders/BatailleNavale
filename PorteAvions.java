@@ -35,7 +35,7 @@ public class PorteAvions extends Bateau implements Serializable {
     protected void addMultipleCases(Case e) throws BateauException{
         int x = e.getX();
         int y = e.getY();
-        if(x > this.getGrille().getLargeur() || y > this.getGrille().getHauteur()) {
+        if(x >= this.getGrille().getLargeur() || y >= this.getGrille().getHauteur()) {
             throw new BateauException("La case n'est pas dans la grille");
         }
         if(this.getOrientation()) {
