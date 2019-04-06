@@ -274,4 +274,108 @@ public class Test {
 		assertEquals("La liste devrait avoir les bonnes positions", list, pa.getlPosition());
 		assertEquals("La liste devrait avoir les bonnes positions", list2, pa2.getlPosition());
 	}
+	
+	/**
+	 * Test de la methode pourcentageTouchee
+	 * de la classe Bateau
+	 */
+	@org.junit.Test
+	public void testPourcentageTouchee() throws GrilleException, CaseException, BateauException {
+		Grille g = new Grille(150, 200);
+		Case c = new Case(111,1);
+		PorteAvions t = new PorteAvions(g, true, c);
+		assertEquals("Le pourcentage devrait etre 0.00", 0.0, t.pourcentageTouche(), 0.001);
+		t.getlPosition().get(0).setTouchee(true);
+		assertEquals("Le pourcentage devrait etre 20.00", 20.0, t.pourcentageTouche(), 0.001);
+	}
+	
+	/**
+	 * Test de la classe Joueur
+	 */
+	@org.junit.Test
+	public void testConstructeurJoueur() throws GrilleException, CaseException {
+		Grille g = new Grille(10,10);
+		Joueur j = new Joueur(g);
+		j.setNomJoueur("Momo");
+		assertEquals("Le joueur devrait s'appeler Momo", "Momo", j.getNomJoueur());
+		assertEquals("Le grille devrait etre la bonne", g, j.getGrille());
+	}
+	
+	@org.junit.Test
+	public void testAjouterBateauJoueur1() throws GrilleException, CaseException, BateauException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		j.ajouterBateau(new Case(10,10), true, 5);
+		j.ajouterBateau(new Case(25,10), true, 3);
+		j.ajouterBateau(new Case(10,98), true, 1);
+		j.ajouterBateau(new Case(10,31), true, 4);
+		j.ajouterBateau(new Case(120,10), true, 2);
+		assertEquals("La liste devrait etre complete", true, j.getlBateau().get(0) instanceof PorteAvions);
+		assertEquals("La liste devrait etre complete", true, j.getlBateau().get(1) instanceof SousMarin);
+		assertEquals("La liste devrait etre complete", true, j.getlBateau().get(2) instanceof Torpilleur);
+		assertEquals("La liste devrait etre complete", true, j.getlBateau().get(3) instanceof Croiseur);
+		assertEquals("La liste devrait etre complete", true, j.getlBateau().get(4) instanceof ContreTorpilleur);
+	}
+	
+	@org.junit.Test(expected = BateauException.class)
+	public void testAjouterBateauJoueur2() throws BateauException, CaseException, GrilleException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		j.ajouterBateau(new Case(10,10), true, 5);
+		j.ajouterBateau(new Case(25,10), true, 5);
+	}
+	
+	@org.junit.Test(expected = BateauException.class)
+	public void testTirerJoueur1() throws BateauException, CaseException, GrilleException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		j.tirer(j, new Case(150,150));
+	}
+	
+	@org.junit.Test
+	public void testTirerJoueur2() throws BateauException, CaseException, GrilleException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		j.tirer(j, new Case(30,30));
+		assertEquals("La case devrait etre touchee", true, j.getGrille().gettCases()[30][30].getTouchee());
+	}
+	
+	@org.junit.Test
+	public void testCoulerJoueur() throws BateauException, CaseException, GrilleException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		j.ajouterBateau(new Case(10,10), true, 2);
+		j.ajouterBateau(new Case(11,10), true, 4);
+		j.tirer(j, new Case(10,10));
+		j.tirer(j, new Case(10,11));
+		j.tirer(j, new Case(11,10));
+		assertEquals("Le bateau devrait etre coule", 100.0, j.getlBateau().get(0).pourcentageTouche(), 0.001);
+		assertEquals("Le bateau ne devrait pas etre coule", 25.0, j.getlBateau().get(1).pourcentageTouche(), 0.001);
+	}
+	
+	@org.junit.Test
+	public void testPerduJoueur() throws BateauException, CaseException, GrilleException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		j.ajouterBateau(new Case(10,10), true, 2);
+		j.ajouterBateau(new Case(11,10), true, 4);
+		j.tirer(j, new Case(10,10));
+		j.tirer(j, new Case(10,11));
+		j.tirer(j, new Case(11,10));
+		j.tirer(j, new Case(11,11));
+		j.tirer(j, new Case(11,12));
+		j.tirer(j, new Case(11,13));
+		assertEquals("Le bateau devrait etre coule", 100.0, j.getlBateau().get(0).pourcentageTouche(), 0.001);
+		assertEquals("Le bateau ne devrait pas etre coule", 100.0, j.getlBateau().get(1).pourcentageTouche(), 0.001);
+		assertEquals("Le joueur devrait avoir perdu", true, j.perdu());
+	}
+	
+	@org.junit.Test
+	public void testPoserBateau() throws BateauException, CaseException, GrilleException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		assertEquals("Le bateau ne devrait pas pouvoir etre posé", false, j.verifierPosBateau(new Case(149,149), false, 3));
+		assertEquals("Le bateau ne devrait pas pouvoir etre posé", false, j.verifierPosBateau(new Case(149,149), true, 3));
+		assertEquals("Le bateau ne devrait pas pouvoir etre posé", true, j.verifierPosBateau(new Case(149,149), false, 1));
+	}
 }
