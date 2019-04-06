@@ -116,11 +116,14 @@ public class Joueur implements Serializable {
      * sur qui on veut tirer et la case sur laquelle on veut tirer
      * @param j Joueur sur lequel on veut tirer
      * @param c Case sur laquelle on veut tirer
+     * @throws BateauException 
      */
-    public void tirer(Joueur j, Case c){
-
-        if (!j.grille.gettCases()[c.getX()][c.getY()].getTouchee()){
-            j.grille.gettCases()[c.getX()][c.getY()].setTouchee(true);
+    public void tirer(Joueur j, Case c) throws BateauException{
+        if(c.getX() >= j.getGrille().getLargeur() || c.getY() >= j.getGrille().getHauteur()) {
+            throw new BateauException("La case n'est pas dans la grille");
+        }
+        if (!j.getGrille().gettCases()[c.getX()][c.getY()].getTouchee()){
+            j.getGrille().gettCases()[c.getX()][c.getY()].setTouchee(true);
         }else {
             Scanner sc = new Scanner(System.in);
             System.out.println("Case deja touchee :");
@@ -144,8 +147,9 @@ public class Joueur implements Serializable {
      * Methode permettant de retirer si le tire ne s'est pas bien passe
      * @param j Joueur sur lequel on veut tirer
      * @param sc Scanner permettant la saisie au clavier
+     * @throws BateauException 
      */
-    public void retirer(Joueur j, Scanner sc){
+    public void retirer(Joueur j, Scanner sc) throws BateauException{
         System.out.println("Case du tableau inaccessible : ");
         System.out.print("Entrez une nouvelle valeur de x pour tirer : ");
         int x = sc.nextInt();
