@@ -36,6 +36,9 @@ public class Torpilleur extends Bateau implements Serializable {
     protected void addMultipleCases(Case e) throws BateauException{
         int x = e.getX();
         int y = e.getY();
+        if(x > this.getGrille().getLargeur() || y > this.getGrille().getHauteur()) {
+            throw new BateauException("La case n'est pas dans la grille");
+        }
         this.addCase(grille.gettCases()[x][y]);
         grille.gettCases()[x][y].setDispo(false);
     }
