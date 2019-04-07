@@ -156,10 +156,10 @@ public class Joueur implements Serializable {
         boolean ok = false;
         while (!ok){
             try {
-                System.out.print("Entrez le x pour tirer : ");
+                System.out.print(this.nomJoueur.toUpperCase()+" : Entrez le x pour tirer : ");
                 x1 = sc.nextInt();
                 sc.nextLine();
-                System.out.print("Entrez le y pour tirer : ");
+                System.out.print(this.nomJoueur.toUpperCase()+" : Entrez le y pour tirer : ");
                 y1 = sc.nextInt();
                 sc.nextLine();
                 ok=true;
