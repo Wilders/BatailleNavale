@@ -369,7 +369,7 @@ public class Joueur implements Serializable {
 
 
     /**
-     * Methode permettant de retourner la liste de bateau du joueur triee par pourcentage d'impact des bateaux
+     * Methode permettant de retourner la liste de bateau du joueur triee par pourcentage d'impact des bateaux par ordre decroissant
      * @param lB Liste des bateaux du joueur
      * @return Liste triee par pourcentage d'impact des bateaux du joueur
      */
@@ -430,7 +430,7 @@ public class Joueur implements Serializable {
     }
     
     /**
-     * Classe de comparaison
+     * Classe de comparaison pour le tri de liste par pourcentage d'impact
      */
     static class Compare implements Comparator<Bateau> {
         @Override
