@@ -153,14 +153,27 @@ public class Joueur implements Serializable {
      */
     public void retirer(Joueur j, Scanner sc) throws BateauException{
         System.out.println("Case du tableau inaccessible : ");
-        System.out.print("Entrez une nouvelle valeur de x pour tirer : ");
-        int x = sc.nextInt();
-        System.out.print("Entrez une nouvelle valeur de y pour tirer : ");
-        int y = sc.nextInt();
-        if (x<0 || x>=j.getGrille().getLargeur() || y<0 || y>=j.getGrille().getHauteur()){
-            retirer(j,sc);
+        int x1=0;
+        int y1=0;
+        boolean ok = false;
+        while (!ok){
+            try {
+                System.out.print(this.nomJoueur.toUpperCase()+" : Entrez le x pour tirer : ");
+                x1 = sc.nextInt();
+                sc.nextLine();
+                System.out.print(this.nomJoueur.toUpperCase()+" : Entrez le y pour tirer : ");
+                y1 = sc.nextInt();
+                sc.nextLine();
+                ok=true;
+            }catch (InputMismatchException ime){
+                System.out.println("Erreur, entrez deux entiers : ");
+                sc.nextLine();
+            }
+        }
+        if (x1>=0 && x1<j.grille.getLargeur() && y1>=0 && y1<j.grille.getHauteur()){
+            this.tirer(j, j.getGrille().gettCases()[x1][y1]);
         }else {
-            tirer(j, j.getGrille().gettCases()[x][y]);
+            this.retirer(j,sc);
         }
     }
 
