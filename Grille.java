@@ -35,7 +35,7 @@ public class Grille implements Serializable {
      */
     public Grille(int pLargeur, int pHauteur) throws GrilleException, CaseException {
         if(pLargeur < 10 || pHauteur < 10) {
-            throw new GrilleException("La largeur et la hauteur doivent être superieures ou egal a 10 et inferieures ou egales a 100");
+            throw new GrilleException("La largeur et la hauteur doivent être superieures ou egales a 10");
         } else {
             this.largeur = pLargeur;
             this.hauteur = pHauteur;
