@@ -367,7 +367,6 @@ public class Joueur implements Serializable {
         return res;
     }
 
-
     /**
      * Methode permettant de retourner l'attribut lBateau du joueur
      * @return Liste des bateaux du joueur
@@ -417,6 +416,9 @@ public class Joueur implements Serializable {
         return res;
     }
     
+    /**
+     * Classe de comparaison
+     */
     static class Compare implements Comparator<Bateau> {
         @Override
         public int compare(Bateau o1, Bateau o2) {
