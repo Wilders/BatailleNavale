@@ -1,5 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -151,27 +153,14 @@ public class Joueur implements Serializable {
      */
     public void retirer(Joueur j, Scanner sc) throws BateauException{
         System.out.println("Case du tableau inaccessible : ");
-        int x1=0;
-        int y1=0;
-        boolean ok = false;
-        while (!ok){
-            try {
-                System.out.print(this.nomJoueur.toUpperCase()+" : Entrez le x pour tirer : ");
-                x1 = sc.nextInt();
-                sc.nextLine();
-                System.out.print(this.nomJoueur.toUpperCase()+" : Entrez le y pour tirer : ");
-                y1 = sc.nextInt();
-                sc.nextLine();
-                ok=true;
-            }catch (InputMismatchException ime){
-                System.out.println("Erreur, entrez deux entiers : ");
-                sc.nextLine();
-            }
-        }
-        if (x1>=0 && x1<j.grille.getLargeur() && y1>=0 && y1<j.grille.getHauteur()){
-            this.tirer(j, j.getGrille().gettCases()[x1][y1]);
+        System.out.print("Entrez une nouvelle valeur de x pour tirer : ");
+        int x = sc.nextInt();
+        System.out.print("Entrez une nouvelle valeur de y pour tirer : ");
+        int y = sc.nextInt();
+        if (x<0 || x>=j.getGrille().getLargeur() || y<0 || y>=j.getGrille().getHauteur()){
+            retirer(j,sc);
         }else {
-            this.retirer(j,sc);
+            tirer(j, j.getGrille().gettCases()[x][y]);
         }
     }
 
@@ -372,21 +361,9 @@ public class Joueur implements Serializable {
      * @return Liste triee par pourcentage d'impact des bateaux du joueur
      */
     public ArrayList<Bateau> triBateauPourcentage(ArrayList<Bateau> lB){
-        int tmp = lB.size();
-        ArrayList<Bateau> res = new ArrayList<>(tmp);
-        ArrayList<Bateau> temp = new ArrayList<>(lB);
-        int min = 0;
-        while(res.size()!= tmp){
-            ListIterator<Bateau> it = temp.listIterator();
-            while (it.hasNext()){
-                Bateau b = it.next();
-                if (b.pourcentageTouche()<=min){
-                    res.add(b);
-                    it.remove();
-                    min=(int)(b.pourcentageTouche())+1;
-                }
-            }
-        }
+    	ArrayList<Bateau> res = new ArrayList<>(lB);
+        res.sort(new Compare());
+        Collections.reverse(res);
         return res;
     }
 
@@ -438,5 +415,18 @@ public class Joueur implements Serializable {
             res += "\t Un " + b.toString() + "\n";
         }
         return res;
+    }
+    
+    static class Compare implements Comparator<Bateau> {
+        @Override
+        public int compare(Bateau o1, Bateau o2) {
+            if (o1.pourcentageTouche() == o2.pourcentageTouche()) {
+                return 0;
+            }
+            else if (o1.pourcentageTouche() > o2.pourcentageTouche()) {
+                return 1;
+            }
+            return -1;
+        }
     }
 }
