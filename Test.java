@@ -374,8 +374,8 @@ public class Test {
 	public void testPoserBateau() throws BateauException, CaseException, GrilleException {
 		Grille g = new Grille(150,150);
 		Joueur j = new Joueur(g);
-		assertEquals("Le bateau ne devrait pas pouvoir etre posé", false, j.verifierPosBateau(new Case(149,149), false, 3));
-		assertEquals("Le bateau ne devrait pas pouvoir etre posé", false, j.verifierPosBateau(new Case(149,149), true, 3));
-		assertEquals("Le bateau ne devrait pas pouvoir etre posé", true, j.verifierPosBateau(new Case(149,149), false, 1));
+		assertEquals("Le bateau ne devrait pas pouvoir etre pose", false, j.verifierPosBateau(new Case(149,149), false, 3));
+		assertEquals("Le bateau ne devrait pas pouvoir etre pose", false, j.verifierPosBateau(new Case(149,149), true, 3));
+		assertEquals("Le bateau ne devrait pas pouvoir etre pose", true, j.verifierPosBateau(new Case(149,149), false, 1));
 	}
 }
