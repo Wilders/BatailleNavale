@@ -378,4 +378,42 @@ public class Test {
 		assertEquals("Le bateau ne devrait pas pouvoir etre pose", false, j.verifierPosBateau(new Case(149,149), true, 3));
 		assertEquals("Le bateau ne devrait pas pouvoir etre pose", true, j.verifierPosBateau(new Case(149,149), false, 1));
 	}
+	
+	@org.junit.Test
+	public void testTriBateauTaille() throws BateauException, CaseException, GrilleException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		j.ajouterBateau(new Case(10,10), true, 2);
+		j.ajouterBateau(new Case(16,10), true, 4);
+		j.ajouterBateau(new Case(11,50), true, 1);
+		j.ajouterBateau(new Case(45,75), true, 3);
+		j.ajouterBateau(new Case(79,20), true, 5);
+		int min = j.triBateauTaille(j.getlBateau()).get(0).getTaille();
+		for(Bateau b: j.triBateauTaille(j.getlBateau())) {
+			if(b.getTaille() < min) {
+				fail("La tri n'est pas bon" + min);
+			}
+			min++;
+		}
+	}
+	
+	@org.junit.Test
+	public void testTriBateauPourcentage() throws BateauException, CaseException, GrilleException {
+		Grille g = new Grille(150,150);
+		Joueur j = new Joueur(g);
+		j.ajouterBateau(new Case(10,10), true, 2);
+		j.ajouterBateau(new Case(16,10), true, 4);
+		j.ajouterBateau(new Case(11,50), true, 1);
+		j.ajouterBateau(new Case(45,75), true, 3);
+		j.ajouterBateau(new Case(79,20), true, 5);
+		j.tirer(j, new Case(10,10));
+		j.tirer(j, new Case(79,20));
+		ArrayList<Bateau> list = j.triBateauPourcentage(j.getlBateau());
+		if(list.get(0).pourcentageTouche() != 50.0) {
+			fail("Le tri n'est pas bon");
+		}
+		if(list.get(1).pourcentageTouche() != 20.0) {
+			fail("Le tri n'est pas bon");
+		}
+	}
 }
