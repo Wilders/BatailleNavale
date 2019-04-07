@@ -95,11 +95,22 @@ public abstract class Partie implements Serializable {
             }
         }
         while ((largeur<10 || largeur>100)||(hauteur<10 || hauteur>100)){
-            System.out.println("Taille de la grille trop grande ou trop petite, entrez de nouvelles dimensions : ");
-            System.out.print("Entrez la largeur de la grille souhaitee (10 minimum, 100 maximum) : ");
-            largeur = sc.nextInt();
-            System.out.print("Entrez la hauteur de la grille souhaitee (10 minimum, 100 maximum) : ");
-            hauteur = sc.nextInt();
+            boolean ok2 = false;
+            while (!ok2){
+                try {
+                    System.out.println("Taille de la grille trop grande ou trop petite, entrez de nouvelles dimensions : ");
+                    System.out.print("Entrez la largeur de la grille souhaitee (10 minimum, 100 maximum) : ");
+                    largeur = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Entrez la hauteur de la grille souhaitee (10 minimum, 100 maximum) : ");
+                    hauteur = sc.nextInt();
+                    sc.nextLine();
+                    ok2=true;
+                }catch (InputMismatchException ime){
+                    System.out.println("Erreur, entrez deux entiers : ");
+                    sc.nextLine();
+                }
+            }
         }
         Grille g = new Grille(largeur,hauteur);
         return g;
